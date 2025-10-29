@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+pip-wheel-metadata/
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+.venv
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+
+# PyCharm / JetBrains
+.idea/
+
+# VS Code
+.vscode/
+
+# mypy
+.mypy_cache/
+
+# C extensions
+*.so
+
+# SQLite
+*.sqlite3
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Editor backup files
+*~
+*.swp
+
+# dotenv
+.env
+.env.*
+
+# Secrets and local settings
+instance/
+.settings/
+
+# Byte-compiled / optimized
+__pycache__/
+*.pyc
+
+# Coverage and test result files
+coverage.xml
+
+# Build artifacts
+.eggs/
+*.egg-info/
+
+# Node/npm (if any frontend present)
+node_modules/
+npm-debug.log
+
+# Ignore VS Code workspace settings
+*.code-workspace
+
