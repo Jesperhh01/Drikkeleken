@@ -1,4 +1,4 @@
-# Python
+# Byte-compiled / optimized
 __pycache__/
 *.py[cod]
 *$py.class
@@ -8,15 +8,13 @@ build/
 dist/
 *.egg-info/
 .eggs/
-*.egg
 pip-wheel-metadata/
 
 # Virtual environments
-env/
 venv/
+env/
 ENV/
 .venv/
-.venv
 
 # Installer logs
 pip-log.txt
@@ -30,11 +28,10 @@ htmlcov/
 .nox/
 .pytest_cache/
 
-# PyCharm / JetBrains
+# IDEs / editors
 .idea/
-
-# VS Code
 .vscode/
+*.code-workspace
 
 # mypy
 .mypy_cache/
@@ -47,6 +44,7 @@ htmlcov/
 
 # Logs
 *.log
+coverage.xml
 
 # macOS
 .DS_Store
@@ -55,7 +53,7 @@ htmlcov/
 *~
 *.swp
 
-# dotenv
+# dotenv / local env
 .env
 .env.*
 
@@ -63,21 +61,12 @@ htmlcov/
 instance/
 .settings/
 
-# Byte-compiled / optimized
-__pycache__/
-*.pyc
-
-# Coverage and test result files
-coverage.xml
-
-# Build artifacts
-.eggs/
-*.egg-info/
-
-# Node/npm (if any frontend present)
+# Node / npm (if present)
 node_modules/
 npm-debug.log
 
-# Ignore VS Code workspace settings
-*.code-workspace
+# Misc
+*.egg
 
+# Python version manager
+.python-version
