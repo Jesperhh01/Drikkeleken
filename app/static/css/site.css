@@ -1,0 +1,114 @@
+/* Base styles */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f5f5f5;
+}
+
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+/* Game controls */
+.game-controls {
+	background-color: white;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+h1 {
+	color: #333;
+	margin-bottom: 2rem;
+}
+
+/* Orange box wrapper for the Start button */
+.button-group {
+	background-color: #FFA500; /* orange */
+	border: 3px solid black;
+	padding: 1.2rem 1.6rem;
+	border-radius: 10px;
+	display: inline-block;
+}
+
+/* Button link inside the orange box */
+.btn {
+	display: inline-block;
+	background: white;
+	color: black;
+	padding: 0.6rem 1.2rem;
+	border: 2px solid black;
+	border-radius: 6px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.btn:hover {
+	background: #f2f2f2;
+}
+
+/* Footer spacing */
+.game-controls .button-group {
+	margin-top: 1rem;
+}
+
+/* Question form styles */
+.question-form {
+	max-width: 700px;
+	margin: 1rem auto 0 auto;
+	text-align: left;
+}
+
+.question-form .form-row {
+	margin-bottom: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.question-form label {
+	font-weight: bold;
+	margin-bottom: 0.4rem;
+}
+
+.question-form input[type="text"],
+.question-form input[type="number"],
+.question-form select,
+.question-form textarea {
+	padding: 0.6rem;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	font-size: 1rem;
+}
+
+.question-form textarea { resize: vertical; }
+
+.question-form .form-actions {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.question-form .btn.submit {
+	background: #4CAF50;
+	color: white;
+	border: none;
+	padding: 0.6rem 1rem;
+	border-radius: 6px;
+}
+
+.question-form .btn.cancel {
+	background: transparent;
+	color: #333;
+	border: 2px solid #ccc;
+	padding: 0.5rem 0.8rem;
+	border-radius: 6px;
+	text-decoration: none;
+}
+
+.question-form .btn.submit:hover { background: #449d48; }
+
+
