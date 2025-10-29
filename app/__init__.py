@@ -7,8 +7,7 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     # Register blueprints
-    from app.routes import auth, main
-    app.register_blueprint(auth.bp)
+    from app.routes import main
     app.register_blueprint(main.bp)
 
     return app
