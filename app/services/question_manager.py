@@ -1,6 +1,9 @@
 import random
-class question_manager:
-    questions = []
+
+
+class QuestionManager:
+    def __init__(self):
+        self.questions = []
 
     def add_question(self, question):
         if question:
@@ -14,3 +17,4 @@ class question_manager:
             return question
         else:
             return "Tomt for spørsmål"
+

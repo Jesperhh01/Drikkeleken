@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎃 Utfordringer 🎃</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+</head>
+<body class="halloween-theme">
+    <div class="floating-pumpkins">
+        <span class="pumpkin">🎃</span>
+        <span class="pumpkin">👻</span>
+        <span class="pumpkin">🦇</span>
+        <span class="pumpkin">💀</span>
+        <span class="pumpkin">🕷️</span>
+    </div>
+
+    <main class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="challenges-display-container">
+            <div class="skull-decoration mb-4">
+                <span class="skull-icon">💀</span>
+                <span class="skull-icon">🎃</span>
+                <span class="skull-icon">💀</span>
+            </div>
+
+            <h1 class="challenge-title mb-4">
+                <span class="glitch" data-text="DIN UTFORDRING">UTFORDRINGER</span>
+            </h1>
+
+            <p class="challenge-subtitle mb-5">
+                Er Adrian modig nok til å fullføre denne? 😈
+            </p>
+
+            <!-- Challenge Display Card -->
+            <div class="challenge-card">
+                <div class="challenge-card-inner">
+                    <div class="challenge-icon-top">🍻</div>
+
+                    <div class="challenge-text" id="currentChallenge">
+                        <!-- Challenge will be displayed here -->
+                        Klikk på knappen for å få en utfordring!
+                    </div>
+
+                    <div class="challenge-icon-bottom">💀</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-container mt-5">
+                <button onclick="getNewChallenge()" class="btn-halloween">
+                    <span class="btn-text">NY UTFORDRING</span>
+                    <span class="btn-icon">🎲</span>
+                </button>
+
+                <a href="{{ url_for('main.index') }}" class="btn-halloween btn-secondary">
+                    <span class="btn-text">TILBAKE</span>
+                    <span class="btn-icon">🏠</span>
+                </a>
+            </div>
+
+            <div class="ghost-decoration mt-5">
+                <span class="ghost">👻</span>
+                <span class="ghost">🦇</span>
+                <span class="ghost">👻</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function getNewChallenge() {
+            const challengeText = document.getElementById('currentChallenge');
+            const button = event.target.closest('button');
+
+            // Add loading state
+            challengeText.classList.add('challenge-loading');
+            challengeText.textContent = 'Henter utfordring...';
+            button.disabled = true;
+
+            // Fetch challenge from backend API
+            fetch('{{ url_for("main.get_challenge") }}')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Kunne ikke hente utfordring');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    challengeText.classList.remove('challenge-loading');
+                    challengeText.classList.add('challenge-appear');
+                    challengeText.textContent = data.challenge;
+                    button.disabled = false;
+
+                    // Remove animation class after it completes
+                    setTimeout(() => {
+                        challengeText.classList.remove('challenge-appear');
+                    }, 600);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    challengeText.classList.remove('challenge-loading');
+                    challengeText.textContent = 'Kunne ikke hente utfordring. Prøv igjen! 😅';
+                    button.disabled = false;
+                });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

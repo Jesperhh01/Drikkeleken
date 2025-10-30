@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💀 Legg til Utfordring 💀</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+</head>
+<body class="halloween-theme">
+    <!-- First Visit Modal -->
+    <div id="firstVisitModal" class="modal fade" tabindex="-1" aria-labelledby="firstVisitModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid #ff8c42; border-radius: 16px;">
+                <div class="modal-header" style="border-bottom: 1px solid rgba(255, 140, 66, 0.3);">
+                    <h5 class="modal-title" id="firstVisitModalLabel" style="color: #ff8c42; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.5rem;">
+                        🍻 Viktig Melding! 🍻
+                    </h5>
+                </div>
+                <div class="modal-body text-center" style="padding: 2rem;">
+                    <img src="{{ url_for('static', filename='img/reminder.jpg') }}" alt="Reminder" style="max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 1.5rem; border: 2px solid rgba(255, 140, 66, 0.3);" onerror="this.style.display='none'">
+                    <p style="color: #fff; font-family: 'Inter', sans-serif; font-size: 1.3rem; font-weight: 600; margin: 0;">
+                        Husk at vi må sjenke denne gutten
+                    </p>
+                    <p style="color: #ffa658; font-family: 'Inter', sans-serif; font-size: 1rem; margin-top: 0.5rem;">
+                        🎃👻🍺
+                    </p>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid rgba(255, 140, 66, 0.3); justify-content: center;">
+                    <button type="button" class="btn-halloween" data-bs-dismiss="modal" style="min-width: 200px;">
+                        <span class="btn-text">OK, SKJØNNER!</span>
+                        <span class="btn-icon">✅</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-pumpkins">
+        <span class="pumpkin">🎃</span>
+        <span class="pumpkin">👻</span>
+        <span class="pumpkin">🦇</span>
+        <span class="pumpkin">💀</span>
+        <span class="pumpkin">🕷️</span>
+    </div>
+
+    <main class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="challenge-container">
+            <div class="skull-decoration mb-4">
+                <span class="skull-icon">🍻</span>
+                <span class="skull-icon">??</span>
+                <span class="skull-icon">🍻</span>
+            </div>
+
+            <h1 class="challenge-title mb-4">
+                <span class="glitch" data-text="UTFORDRINGER">UTFORDRINGER</span>
+            </h1>
+
+            <p class="challenge-subtitle mb-5">
+                Legg til din egen utfordring i drikkeleken!<br>
+                Klarer vi å få Adrian til å... <span class="spooky-text">bli blackout?</span> 👻
+            </p>
+
+            <div class="challenge-form-wrapper">
+                <form method="POST" action="{{ url_for('main.add_question') }}" class="challenge-form">
+                    <div class="form-group mb-4">
+                        <label for="question" class="form-label">
+                            <span class="label-icon">🎃</span>
+                            Din utfordring:
+                        </label>
+                        <textarea
+                            id="question"
+                            name="question"
+                            class="form-control challenge-input"
+                            rows="4"
+                            placeholder="Skriv din utfordring her! Eksempel: Alle som har jobbet for BLEZT chugger resten"
+                            required
+                            maxlength="500"
+                        ></textarea>
+                        <div class="char-counter">
+                            <span id="charCount">0</span>/500 tegn
+                        </div>
+                    </div>
+
+                    <div class="button-group-form">
+                        <button type="submit" class="btn-halloween">
+                            <span class="btn-text">LEGG TIL UTFORDRING</span>
+                            <span class="btn-icon">🎃</span>
+                        </button>
+
+                        <a href="{{ url_for('main.index') }}" class="btn-halloween btn-ghost">
+                            <span class="btn-text">TILBAKE</span>
+                            <span class="btn-icon">👻</span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="ghost-decoration mt-5">
+                <span class="ghost">🍺</span>
+                <span class="ghost">🍻</span>
+                <span class="ghost">🍺</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Show modal only on first visit
+        document.addEventListener('DOMContentLoaded', function() {
+            const hasVisited = localStorage.getItem('hasVisitedQuestions');
+
+            if (!hasVisited) {
+                const modal = new bootstrap.Modal(document.getElementById('firstVisitModal'));
+                modal.show();
+                localStorage.setItem('hasVisitedQuestions', 'true');
+            }
+        });
+
+        // Character counter
+        const textarea = document.getElementById('question');
+        const charCount = document.getElementById('charCount');
+
+        textarea.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+
+        // Form submission with success animation and reset
+        const form = document.querySelector('.challenge-form');
+        const originalButtonHTML = '<span class="btn-text">LEGG TIL UTFORDRING</span><span class="btn-icon">🎃</span>';
+        const originalButtonStyle = '';
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const button = form.querySelector('button[type="submit"]');
+            const formData = new FormData(form);
+
+            // Disable button and show loading
+            button.disabled = true;
+            button.innerHTML = '<span class="btn-text">SENDER... ⏳</span>';
+
+            // Submit the form via fetch
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    button.innerHTML = '<span class="btn-text">SENDT! 🎉</span>';
+                    button.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+
+                    // Reset form and button after 2 seconds
+                    setTimeout(() => {
+                        form.reset();
+                        charCount.textContent = '0';
+                        button.innerHTML = originalButtonHTML;
+                        button.style.background = originalButtonStyle;
+                        button.disabled = false;
+                    }, 2000);
+                } else {
+                    // Show error
+                    button.innerHTML = '<span class="btn-text">FEIL! ❌</span>';
+                    button.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+
+                    setTimeout(() => {
+                        button.innerHTML = originalButtonHTML;
+                        button.style.background = originalButtonStyle;
+                        button.disabled = false;
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                button.innerHTML = '<span class="btn-text">FEIL! ❌</span>';
+                button.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+
+                setTimeout(() => {
+                    button.innerHTML = originalButtonHTML;
+                    button.style.background = originalButtonStyle;
+                    button.disabled = false;
+                }, 2000);
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
