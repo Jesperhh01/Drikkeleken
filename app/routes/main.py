@@ -3,6 +3,7 @@ from .. import services
 
 bp = Blueprint('main', __name__)
 _question_manager = services.question_manager
+_troll_manager = services.troll_manager
 
 @bp.route('/')
 def index():
@@ -31,4 +32,10 @@ def add_question():
 def get_challenge():
     challenge = _question_manager.display_question()
     return jsonify({"challenge": challenge})
+
+@bp.route("/get_troll_image", methods=["GET"])
+def get_troll_image():
+    image_url = _troll_manager.get_troll_image()
+    return jsonify({"url": image_url})
+
 

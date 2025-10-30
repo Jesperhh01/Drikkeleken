@@ -11,6 +11,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
 </head>
 <body class="halloween-theme">
+    <!-- Troll Image Modal -->
+    <div id="trollModal" class="modal fade" tabindex="-1" aria-labelledby="trollModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid #ff8c42; border-radius: 16px;">
+                <div class="modal-header" style="border-bottom: 1px solid rgba(255, 140, 66, 0.3);">
+                    <h5 class="modal-title" id="trollModalLabel" style="color: #ff8c42; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.5rem;">
+                        🎃 OVERRASKELSE! AVBILDET PERSON, TA 10 SLURKER! 🎃
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" style="padding: 2rem;">
+                    <img id="trollImage" src="" alt="Troll" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(255, 140, 66, 0.3);">
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid rgba(255, 140, 66, 0.3); justify-content: center;">
+                    <button type="button" class="btn-halloween" data-bs-dismiss="modal" style="min-width: 200px;">
+                        <span class="btn-text">LUKK</span>
+                        <span class="btn-icon">👻</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="floating-pumpkins">
         <span class="pumpkin">🎃</span>
         <span class="pumpkin">👻</span>
@@ -23,7 +46,7 @@
         <div class="challenges-display-container">
             <div class="skull-decoration mb-4">
                 <span class="skull-icon">💀</span>
-                <span class="skull-icon">🎃</span>
+                <span class="skull-icon">❤️‍??</span>
                 <span class="skull-icon">💀</span>
             </div>
 
@@ -71,6 +94,9 @@
     </main>
 
     <script>
+        // Track clicks without showing troll image
+        let clicksSinceLastTroll = 0;
+
         function getNewChallenge() {
             const challengeText = document.getElementById('currentChallenge');
             const button = event.target.closest('button');
@@ -98,12 +124,63 @@
                     setTimeout(() => {
                         challengeText.classList.remove('challenge-appear');
                     }, 600);
+
+                    // Increment click counter
+                    clicksSinceLastTroll++;
+                    console.log('Clicks since last troll:', clicksSinceLastTroll);
+
+                    // Force show on 10th click, otherwise 30% chance
+                    let shouldShowTroll = false;
+                    if (clicksSinceLastTroll >= 10) {
+                        console.log('10 clicks reached - forcing troll image!');
+                        shouldShowTroll = true;
+                    } else {
+                        const randomValue = Math.random();
+                        shouldShowTroll = randomValue < 0.3;
+                        console.log('Random value:', randomValue, 'Should show troll:', shouldShowTroll);
+                    }
+
+                    if (shouldShowTroll) {
+                        console.log('Triggering troll image!');
+                        showTrollImage();
+                        clicksSinceLastTroll = 0; // Reset counter after showing
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     challengeText.classList.remove('challenge-loading');
                     challengeText.textContent = 'Kunne ikke hente utfordring. Prøv igjen! 😅';
                     button.disabled = false;
+                });
+        }
+
+        function showTrollImage() {
+            console.log('showTrollImage function called');
+            // Fetch random troll image URL from backend
+            fetch('{{ url_for("main.get_troll_image") }}')
+                .then(response => {
+                    console.log('Troll image response:', response);
+                    if (!response.ok) {
+                        throw new Error('Kunne ikke hente troll bilde');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Troll image data:', data);
+                    const trollImage = document.getElementById('trollImage');
+                    // Set the image src to the URL returned from the API
+                    const imageUrl = data.url || data.image_url || data;
+                    console.log('Setting image URL to:', imageUrl);
+                    trollImage.src = imageUrl;
+
+                    // Show the modal
+                    console.log('Showing troll modal');
+                    const modal = new bootstrap.Modal(document.getElementById('trollModal'));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error('Error loading troll image:', error);
+                    // Silently fail - don't show modal if image can't be loaded
                 });
         }
     </script>
