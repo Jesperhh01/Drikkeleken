@@ -38,4 +38,13 @@ def get_troll_image():
     image_url = _troll_manager.get_troll_image()
     return jsonify({"url": image_url})
 
+@bp.route("/health")
+def health():
+    """Health check endpoint for AWS Elastic Beanstalk"""
+    return jsonify({
+        "status": "healthy",
+        "service": "drikkeleken",
+        "version": "1.0"
+    }), 200
+
 

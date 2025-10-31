@@ -1,0 +1,89 @@
+╔═══════════════════════════════════════════════════════════════╗
+║      🌐 CUSTOM DOMAIN SETUP - QUICK REFERENCE 🌐              ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📋 YOUR CURRENT EB URL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+drikkeleken-prod.eba-5u8da7it.eu-north-1.elasticbeanstalk.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 QUICK SETUP (3 STEPS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣  Run: ./setup-custom-domain.sh
+2️⃣  Choose your DNS provider option
+3️⃣  Follow the prompts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 MANUAL SETUP (If you prefer)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DNS Provider: Login to your domain's DNS settings
+
+Add CNAME Record:
+  Type:   CNAME
+  Name:   www
+  Value:  drikkeleken-prod.eba-5u8da7it.eu-north-1.elasticbeanstalk.com
+  TTL:    300
+
+Wait: 5-60 minutes for DNS propagation
+Test: curl http://www.yourdomain.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🏷️  RECOMMENDED DNS PROVIDERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. AWS Route 53    → Best integration, automated
+2. Cloudflare      → Free SSL, fast, easy
+3. GoDaddy         → Popular, simple
+4. Namecheap       → Affordable, reliable
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💰 COSTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Domain Registration:    $12-15/year (.com)
+Route 53 Hosted Zone:   $0.50/month (optional)
+SSL Certificate (ACM):  FREE
+Cloudflare:            FREE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔒 SSL/HTTPS SETUP (Optional but Recommended)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Option 1: AWS Certificate Manager (Free)
+  1. Request certificate in ACM console
+  2. Add DNS validation records
+  3. Attach to EB load balancer
+
+Option 2: Cloudflare (Free & Instant)
+  1. Add domain to Cloudflare
+  2. Enable "Proxy" on DNS record
+  3. Done! SSL automatically enabled
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ VERIFICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Check DNS:     nslookup www.yourdomain.com
+Test HTTP:     curl http://www.yourdomain.com
+Test HTTPS:    curl https://www.yourdomain.com
+Health Check:  curl http://www.yourdomain.com/health
+Propagation:   https://dnschecker.org
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 DETAILED GUIDES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Full Documentation:    CUSTOM_DOMAIN_SETUP.md
+Automated Script:      ./setup-custom-domain.sh
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 MOST COMMON SETUP (Cloudflare - Recommended for Beginners)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Buy domain (any registrar)
+2. Add domain to Cloudflare (free account)
+3. Update nameservers to Cloudflare
+4. In Cloudflare DNS: Add CNAME record
+   - Name: www
+   - Target: drikkeleken-prod.eba-5u8da7it.eu-north-1.elasticbeanstalk.com
+   - Proxy: ON (🟠 orange cloud) → Instant free SSL!
+5. Wait 5-30 minutes
+6. Visit: https://www.yourdomain.com ✅
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Need help? Run: ./setup-custom-domain.sh
+

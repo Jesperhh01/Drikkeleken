@@ -13,23 +13,134 @@
 <body class="halloween-theme">
     <!-- Troll Image Modal -->
     <div id="trollModal" class="modal fade" tabindex="-1" aria-labelledby="trollModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 90vw; height: auto; margin: 1rem auto;">
             <div class="modal-content" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 2px solid #ff8c42; border-radius: 16px;">
-                <div class="modal-header" style="border-bottom: 1px solid rgba(255, 140, 66, 0.3);">
-                    <h5 class="modal-title" id="trollModalLabel" style="color: #ff8c42; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.5rem;">
-                        🎃 OVERRASKELSE! AVBILDET PERSON, TA 10 SLURKER! 🎃
+                <div class="modal-header" style="border-bottom: 1px solid rgba(255, 140, 66, 0.3); flex-shrink: 0; padding: 0.75rem 1rem;">
+                    <h5 class="modal-title" id="trollModalLabel" style="color: #ff8c42; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: clamp(0.9rem, 2.5vw, 1.2rem); line-height: 1.3;">
+                        🎃 OVERRASKELSE! 🎃
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center" style="padding: 2rem;">
-                    <img id="trollImage" src="" alt="Troll" style="max-width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(255, 140, 66, 0.3);">
+
+                <div class="modal-body text-center" style="padding: 0.5rem; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <img id="trollImage" src="" alt="Troll" style="max-width: 100%; max-height: 85vh; width: auto; height: auto; object-fit: contain; border-radius: 12px; border: 2px solid rgba(255, 140, 66, 0.3); display: block;">
+
+                    <!-- Dice Roll Display - Overlay on Image -->
+                    <div id="diceRollContainer" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; background: rgba(26, 26, 46, 0.95); padding: 2rem; border-radius: 20px; border: 3px solid #ff8c42; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);">
+                        <div class="dice-container">
+                            <div id="dice3d" class="dice">
+                                <div class="dice-side dice-one">
+                                    <span class="dot"></span>
+                                </div>
+                                <div class="dice-side dice-two">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                                <div class="dice-side dice-three">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                                <div class="dice-side dice-four">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                                <div class="dice-side dice-five">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                                <div class="dice-side dice-six">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="diceResult" style="color: #fff; font-size: 1.2rem; font-weight: 700; margin-top: 1rem; font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);">
+                            Kaster terning...
+                        </p>
+                    </div>
                 </div>
-                <div class="modal-footer" style="border-top: 1px solid rgba(255, 140, 66, 0.3); justify-content: center;">
-                    <button type="button" class="btn-halloween" data-bs-dismiss="modal" style="min-width: 200px;">
+                <div class="modal-footer" style="border-top: 1px solid rgba(255, 140, 66, 0.3); justify-content: center; flex-shrink: 0; padding: 0.75rem;">
+                    <button type="button" class="btn-halloween" data-bs-dismiss="modal" style="min-width: 180px; padding: 0.75rem 1.5rem;">
                         <span class="btn-text">LUKK</span>
                         <span class="btn-icon">👻</span>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iPhone Call Modal -->
+    <div id="iphoneCallModal" class="modal fade" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 380px; margin: 1rem auto;">
+            <div class="iphone-call-screen">
+                <!-- Status Bar -->
+                <div class="iphone-status-bar">
+                    <span class="status-time" id="currentTime">12:34</span>
+                    <div class="status-icons">
+                        <span class="signal-icon">📶</span>
+                        <span class="wifi-icon">📡</span>
+                        <span class="battery-icon">🔋</span>
+                    </div>
+                </div>
+
+                <!-- Call Content -->
+                <div class="iphone-call-content">
+                    <p class="call-label">Innkommende anrop</p>
+
+                    <!-- Profile Image -->
+                    <div class="caller-image">
+                        <div class="caller-avatar">😈</div>
+                    </div>
+
+                    <!-- Caller Name -->
+                    <h2 class="caller-name">Resten</h2>
+                    <p class="caller-number" id="callerSubtext">Drikke opp Adrian</p>
+
+                    <!-- Call Actions -->
+                    <div class="call-actions">
+                        <button class="call-btn remind-btn" onclick="dismissiPhoneCall()">
+                            <div class="btn-icon-circle remind-circle">
+                                <span>⏰</span>
+                            </div>
+                            <span class="btn-label">Påminn meg</span>
+                        </button>
+                        <button class="call-btn message-btn" onclick="dismissiPhoneCall()">
+                            <div class="btn-icon-circle message-circle">
+                                <span>💬</span>
+                            </div>
+                            <span class="btn-label">Melding</span>
+                        </button>
+                    </div>
+
+                    <!-- Answer/Decline Buttons -->
+                    <div class="answer-decline-container">
+                        <button class="decline-btn" onclick="dismissiPhoneCall()">
+                            <div class="phone-icon-circle decline-circle">
+                                <span>📞</span>
+                            </div>
+                            <span class="action-label">Avvis</span>
+                        </button>
+                        <button class="accept-btn" onclick="dismissiPhoneCall()">
+                            <div class="phone-icon-circle accept-circle">
+                                <span>📞</span>
+                            </div>
+                            <span class="action-label">Svar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Home Indicator -->
+                <div class="iphone-home-indicator"></div>
             </div>
         </div>
     </div>
@@ -96,6 +207,57 @@
     <script>
         // Track clicks without showing troll image
         let clicksSinceLastTroll = 0;
+        // Track challenges since last iPhone call
+        let challengesSinceLastCall = 0;
+
+        // Update time in iPhone call modal
+        function updateCallTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const timeElement = document.getElementById('currentTime');
+            if (timeElement) {
+                timeElement.textContent = `${hours}:${minutes}`;
+            }
+        }
+
+        // Dismiss iPhone call modal
+        function dismissiPhoneCall() {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('iphoneCallModal'));
+            if (modal) {
+                modal.hide();
+            }
+        }
+
+        // Show iPhone call modal
+        function showiPhoneCall() {
+            // List of possible callers
+            const callerNames = [
+                "Aurora",
+                "Adrian",
+                "Emanuel",
+                "Liv Gudrun",
+                "Tone Mari",
+                "Jesper",
+                "Remo",
+                "Tor"
+            ];
+
+            // Pick a random caller
+            const randomCaller = callerNames[Math.floor(Math.random() * callerNames.length)];
+
+            // Update the subtext with the random name
+            document.getElementById('callerSubtext').textContent = `Drikke opp ${randomCaller}`;
+
+            updateCallTime();
+            const modal = new bootstrap.Modal(document.getElementById('iphoneCallModal'));
+            modal.show();
+
+            // Vibrate if supported (simulates phone vibration)
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 200]);
+            }
+        }
 
         function getNewChallenge() {
             const challengeText = document.getElementById('currentChallenge');
@@ -105,6 +267,15 @@
             challengeText.classList.add('challenge-loading');
             challengeText.textContent = 'Henter utfordring...';
             button.disabled = true;
+
+            // Check for iPhone call (5% chance OR forced after 20 challenges)
+            const callChance = Math.random();
+            challengesSinceLastCall++; // Increment challenge counter
+            const willShowCall = (callChance < 0.05) || (challengesSinceLastCall >= 20);
+
+            if (willShowCall) {
+                console.log('iPhone call will be triggered! Chance:', callChance, 'Challenges since last:', challengesSinceLastCall);
+            }
 
             // Fetch challenge from backend API
             fetch('{{ url_for("main.get_challenge") }}')
@@ -125,18 +296,27 @@
                         challengeText.classList.remove('challenge-appear');
                     }, 600);
 
-                    // Increment click counter
+                    // Show iPhone call if determined earlier
+                    if (willShowCall) {
+                        console.log('Showing iPhone call now!');
+                        setTimeout(() => showiPhoneCall(), 800);
+                        clicksSinceLastTroll = 0; // Reset troll counter when call appears
+                        challengesSinceLastCall = 0; // Reset call counter
+                        return; // Don't check for troll if showing call
+                    }
+
+                    // Increment click counter (only if no call shown)
                     clicksSinceLastTroll++;
                     console.log('Clicks since last troll:', clicksSinceLastTroll);
 
-                    // Force show on 10th click, otherwise 30% chance
+                    // Force show troll on 10th click, otherwise 30% chance
                     let shouldShowTroll = false;
                     if (clicksSinceLastTroll >= 10) {
                         console.log('10 clicks reached - forcing troll image!');
                         shouldShowTroll = true;
                     } else {
                         const randomValue = Math.random();
-                        shouldShowTroll = randomValue < 0.3;
+                        shouldShowTroll = randomValue < 0.15;
                         console.log('Random value:', randomValue, 'Should show troll:', shouldShowTroll);
                     }
 
@@ -156,6 +336,11 @@
 
         function showTrollImage() {
             console.log('showTrollImage function called');
+
+            // Roll the dice (1-6 sips for a real dice)
+            const sipsCount = Math.floor(Math.random() * 6) + 1;
+            console.log('Dice rolled:', sipsCount, 'sips');
+
             // Fetch random troll image URL from backend
             fetch('{{ url_for("main.get_troll_image") }}')
                 .then(response => {
@@ -168,7 +353,6 @@
                 .then(data => {
                     console.log('Troll image data:', data);
                     const trollImage = document.getElementById('trollImage');
-                    // Set the image src to the URL returned from the API
                     const imageUrl = data.url || data.image_url || data;
                     console.log('Setting image URL to:', imageUrl);
                     trollImage.src = imageUrl;
@@ -177,11 +361,73 @@
                     console.log('Showing troll modal');
                     const modal = new bootstrap.Modal(document.getElementById('trollModal'));
                     modal.show();
+
+                    // Animate the dice roll
+                    animateDiceRoll(sipsCount);
                 })
                 .catch(error => {
                     console.error('Error loading troll image:', error);
-                    // Silently fail - don't show modal if image can't be loaded
                 });
+        }
+
+        function animateDiceRoll(finalNumber) {
+            const dice = document.getElementById('dice3d');
+            const diceResult = document.getElementById('diceResult');
+            const diceContainer = document.getElementById('diceRollContainer');
+
+            // Hide dice overlay initially
+            diceContainer.style.opacity = '0';
+
+            // Wait 2 seconds before showing dice overlay (let user see image first)
+            setTimeout(() => {
+                diceContainer.style.opacity = '1';
+                diceContainer.style.transition = 'opacity 0.5s ease-in';
+
+                // Reset state
+                diceResult.textContent = 'Kaster terning...';
+                dice.className = 'dice';
+
+                // Add rolling animation
+                dice.classList.add('rolling');
+
+                // Random spins for effect
+                const randomX = Math.floor(Math.random() * 360) + 720; // At least 2 full rotations
+                const randomY = Math.floor(Math.random() * 360) + 720;
+                const randomZ = Math.floor(Math.random() * 360) + 360;
+
+                dice.style.transform = `rotateX(${randomX}deg) rotateY(${randomY}deg) rotateZ(${randomZ}deg)`;
+
+                // After 2 seconds of rolling, land on the final number
+                setTimeout(() => {
+                    dice.classList.remove('rolling');
+                    dice.classList.add('stopped');
+
+                    // FIXED: Correct rotation mappings for each dice face
+                    const rotations = {
+                        1: 'rotateX(0deg) rotateY(0deg)',       // dice-one (front)
+                        2: 'rotateX(0deg) rotateY(180deg)',     // dice-two (back)
+                        3: 'rotateX(0deg) rotateY(90deg)',      // dice-three (left) - FIXED
+                        4: 'rotateX(0deg) rotateY(-90deg)',     // dice-four (right) - FIXED
+                        5: 'rotateX(90deg) rotateY(0deg)',      // dice-five (bottom) - FIXED
+                        6: 'rotateX(-90deg) rotateY(0deg)'      // dice-six (top) - FIXED
+                    };
+
+                    dice.style.transform = rotations[finalNumber];
+
+                    // Update result text
+                    const slurkerText = finalNumber === 1 ? 'SLURK' : 'SLURKER';
+                    diceResult.innerHTML = `
+                        <span style="color: #ff8c42; font-size: 2rem;">${finalNumber}</span><br>
+                        <span style="color: #fff; font-size: 1.2rem;">${slurkerText}!</span><br>
+                        <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">AVBILDET PERSON MÅ DRIKKE!</span>
+                    `;
+
+                    // Jackpot effect
+                    if (finalNumber >= 5) {
+                        diceResult.innerHTML += '<br><span style="font-size: 2rem;">🎉 JACKPOT! 🎉</span>';
+                    }
+                }, 2000);
+            }, 2000); // 2 second delay before showing dice
         }
     </script>
 

@@ -36,7 +36,6 @@ class TrollManager:
             'https://media.discordapp.net/attachments/376380650552557578/1433456357368922316/IDG_20250923_193754_561.jpg?ex=6904c1c3&is=69037043&hm=8482ccdea1f7e86c3086e9e7762b38770c7e8f59f0419d831dc6df2493c7cb68&=&format=webp&width=2330&height=1748',
             'https://media.discordapp.net/attachments/376380650552557578/1433456360384888842/IDG_20250824_010124_980.jpg?ex=6904c1c4&is=69037044&hm=85a4b78395af12e2f1fb96234a82f79e52e994941c43e7c84f3f4c0aa4f05eef&=&format=webp&width=1310&height=1748',
             'https://media.discordapp.net/attachments/376380650552557578/1433456359776456744/IDG_20250824_001134_113.jpg?ex=6904c1c4&is=69037044&hm=1d7cfb88b03a39ef188bf68033ef979b660e95f3e3d2c8411613e1a8d6a2d065&=&format=webp&width=1310&height=1748',
-            'https://media.discordapp.net/attachments/376380650552557578/1433456360946667752/IDG_20250819_212731_288.jpg?ex=6904c1c4&is=69037044&hm=49a616960fddf7d784bdbd954339edce7b72883b4d15108ac2af2b733d5aa5ed&=&format=webp&width=1310&height=1748'
             'https://media.discordapp.net/attachments/376380650552557578/1433456582573686988/IDG_20250824_020902_074.jpg?ex=6904c1f9&is=69037079&hm=aaf9f514d0a40ad6345392d61a56f76a8e6be8860970b999bb763d46e220c484&=&format=webp&width=1310&height=1748',
             'https://media.discordapp.net/attachments/376380650552557578/1433456583073071144/IDG_20250824_020811_125.jpg?ex=6904c1f9&is=69037079&hm=19803a5baf3762844b580b0da6822c20f25221be74cb6307012e42b663c8cbda&=&format=webp&width=1310&height=1748',
             'https://media.discordapp.net/attachments/376380650552557578/1433456584708853810/IDG_20250813_171830_562.jpg?ex=6904c1fa&is=6903707a&hm=2ac88a911fc1709b2d1c3fe388a34de9c4293e07ace621ee3d80ea637fea4944&=&format=webp&width=1310&height=1748',
@@ -45,9 +44,6 @@ class TrollManager:
             'https://media.discordapp.net/attachments/376380650552557578/1433457083977695335/IMG_5901.jpg?ex=6904c271&is=690370f1&hm=381b51aad295f60dee96a412afc53412364c4fa6dc567b4553f3f3ba5cb47de4&=&format=webp&width=2622&height=1748',
             'https://media.discordapp.net/attachments/376380650552557578/1433456585283469445/IDG_20250813_171516_550.jpg?ex=6904c1fa&is=6903707a&hm=71a7f48df75003f40479ff8dadd93166261dc9e0201a8bfe8eee4b70aba09fd7&=&format=webp&width=2330&height=1748',
             'https://media.discordapp.net/attachments/376380650552557578/1433456584238956574/IDG_20250814_233110_193.jpg?ex=6904c1fa&is=6903707a&hm=df29ef978f940556d37964b091c1d03fe5296e8fd463ca3343d9a2d63c13289c&=&format=webp&width=1310&height=1748'
-            
-            
-            
         ]
         random_index =  random.randint(0, len(troll_images) - 1)
         return troll_images[random_index]
